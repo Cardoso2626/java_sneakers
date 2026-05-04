@@ -23,7 +23,7 @@ public class SneackerService {
         this.usuarioRepository = usuarioRepository;
         this.musicaRepository = musicaRepository;
     }
-
+    
     public List<SneackerResponse> listarSneackers(){
         List<Sneacker> sneackers = sneackerRepository.findAll();
         return sneackers.stream()

@@ -5,6 +5,7 @@ package br.com.sneacker.sneackerjava.controller;
 import br.com.sneacker.sneackerjava.dto.UsuarioRequest;
 import br.com.sneacker.sneackerjava.dto.UsuarioResponse;
 import br.com.sneacker.sneackerjava.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class UsuarioController {
 
 
     @PostMapping("/criar")
-    public ResponseEntity<UsuarioResponse> criarUsuario(@RequestBody UsuarioRequest usuarioRequest) {
+    public ResponseEntity<UsuarioResponse> criarUsuario(@RequestBody @Valid UsuarioRequest usuarioRequest) {
         UsuarioResponse usuarioResponse = usuarioService.criarUsuario(usuarioRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioResponse);
     }

@@ -20,6 +20,9 @@ public class UsuarioService {
         usuario.setNomeCompleto(usuarioRequest.getNomeCompleto());
         usuario.setCpf(usuarioRequest.getCpf());
         usuario.setSenha(usuarioRequest.getSenha());
+
+        usuario = usuarioRepository.save(usuario);
+
         return new UsuarioResponse(
                 usuario.getEmail(),
                 usuario.getNomeCompleto(),
