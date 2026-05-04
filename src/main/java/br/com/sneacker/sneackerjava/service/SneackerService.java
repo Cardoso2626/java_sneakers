@@ -10,6 +10,7 @@ import br.com.sneacker.sneackerjava.repository.SneackerRepository;
 import br.com.sneacker.sneackerjava.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class SneackerService {
         this.usuarioRepository = usuarioRepository;
         this.musicaRepository = musicaRepository;
     }
-    
+
     public List<SneackerResponse> listarSneackers(){
         List<Sneacker> sneackers = sneackerRepository.findAll();
         return sneackers.stream()
@@ -100,5 +101,20 @@ public class SneackerService {
                 sneacker.getMusica() != null ? sneacker.getMusica().getNome() : null,
                 sneacker.getUsuario() != null ? sneacker.getUsuario().getEmail() : null
         );
+    }
+
+    public List<SneackerResponse> listarTenisPorEmailUsuario(String emailUsuario) {
+        Usuario usuario = usuarioRepository.findByEmail(emailUsuario).orElseThrow(() -> new RuntimeException("Email de usuário não encontrado: " + emailUsuario));
+        List<Sneacker> sneackers = usuario.getSneackers();
+        return sneackers.stream()
+                .map(s -> new SneackerResponse(
+                        s.getId(),
+                        s.getNome(),
+                        s.getMarca(),
+                        s.getPreco(),
+                        s.getAdquirido(),
+                        s.getMusica() != null ? s.getMusica().getNome() : null,
+                        s.getUsuario() != null  ? s.getUsuario().getEmail() : null
+                )).collect(Collectors.toList());
     }
 }

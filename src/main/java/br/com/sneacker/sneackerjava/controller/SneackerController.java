@@ -41,4 +41,10 @@ public class SneackerController {
         SneackerResponse sneacker = sneackerService.atualizarSneacker(sneackerRequest, id);
         return ResponseEntity.ok(sneacker);
     }
+
+    @GetMapping("/listar/{email}")
+    public ResponseEntity<List<SneackerResponse>> listarSneackerPorEmail(@PathVariable String email){
+        List<SneackerResponse> sneackers = sneackerService.listarTenisPorEmailUsuario(email);
+        return ResponseEntity.status(HttpStatus.OK).body(sneackers);
+    }
 }
