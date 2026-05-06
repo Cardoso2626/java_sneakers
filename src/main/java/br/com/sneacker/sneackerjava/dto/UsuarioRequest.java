@@ -1,6 +1,10 @@
 package br.com.sneacker.sneackerjava.dto;
 
+import br.com.sneacker.sneackerjava.model.Sneacker;
+import br.com.sneacker.sneackerjava.security.UsuarioRole;
 import jakarta.validation.constraints.*;
+
+import java.util.List;
 
 public class UsuarioRequest {
 
@@ -15,8 +19,28 @@ public class UsuarioRequest {
     private String cpf;
     @NotBlank(message = "A senha é obrigatória")
     @Size(min = 5, max = 8, message = "A senha deve conter entre 5 a 8 caracteres!")
+    private List<Sneacker> sneackers;
     private String senha;
 
+    public UsuarioRole role;
+
+
+    public List<Sneacker> getSneackers() {
+        return sneackers;
+    }
+
+    public void setSneackers(List<Sneacker> sneackers) {
+        this.sneackers = sneackers;
+    }
+
+    public UsuarioRole getRole() {
+        return role;
+    }
+
+
+    public void setRole(UsuarioRole role) {
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;

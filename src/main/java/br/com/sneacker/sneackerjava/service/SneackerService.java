@@ -52,7 +52,7 @@ public class SneackerService {
             sneacker.setMusica(null);
         }
         if (sneackerRequest.getEmailUsuario() != null) {
-            Usuario usuario = usuarioRepository.findByEmail(sneackerRequest.getEmailUsuario()).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + sneackerRequest.getEmailUsuario()));
+            Usuario usuario = usuarioRepository.findOptionalByEmail(sneackerRequest.getEmailUsuario()).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + sneackerRequest.getEmailUsuario()));
             sneacker.setUsuario(usuario);
         }else{
             sneacker.setUsuario(null);
@@ -87,7 +87,7 @@ public class SneackerService {
             sneacker.setMusica(musica);
         }
         if (sneackerRequest.getEmailUsuario() != null) {
-            Usuario usuario = usuarioRepository.findByEmail(sneackerRequest.getEmailUsuario()).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + sneackerRequest.getEmailUsuario()));
+            Usuario usuario = usuarioRepository.findOptionalByEmail(sneackerRequest.getEmailUsuario()).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + sneackerRequest.getEmailUsuario()));
             sneacker.setUsuario(usuario);
         }
 
@@ -104,7 +104,7 @@ public class SneackerService {
     }
 
     public List<SneackerResponse> listarTenisPorEmailUsuario(String emailUsuario) {
-        Usuario usuario = usuarioRepository.findByEmail(emailUsuario).orElseThrow(() -> new RuntimeException("Email de usuário não encontrado: " + emailUsuario));
+        Usuario usuario = usuarioRepository.findOptionalByEmail(emailUsuario).orElseThrow(() -> new RuntimeException("Email de usuário não encontrado: " + emailUsuario));
         List<Sneacker> sneackers = usuario.getSneackers();
         return sneackers.stream()
                 .map(s -> new SneackerResponse(
