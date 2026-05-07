@@ -2,15 +2,12 @@ package br.com.sneacker.sneackerjava.controller;
 
 import br.com.sneacker.sneackerjava.dto.MusicaRequest;
 import br.com.sneacker.sneackerjava.dto.MusicaResponse;
-import br.com.sneacker.sneackerjava.model.Musica;
 import br.com.sneacker.sneackerjava.service.MusicaService;
 
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/musica")

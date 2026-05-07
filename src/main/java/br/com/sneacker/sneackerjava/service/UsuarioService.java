@@ -1,7 +1,5 @@
 package br.com.sneacker.sneackerjava.service;
 
-
-import br.com.sneacker.sneackerjava.dto.UsuarioRequest;
 import br.com.sneacker.sneackerjava.dto.UsuarioResponse;
 import br.com.sneacker.sneackerjava.model.Usuario;
 import br.com.sneacker.sneackerjava.repository.UsuarioRepository;
@@ -23,9 +21,7 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
         return new UsuarioResponse(
                 usuario.getEmail(),
-                usuario.getNomeCompleto(),
-                usuario.getCpf(),
-                usuario.getSenha()
+                usuario.getNomeCompleto()
         );
     }
 
