@@ -2,7 +2,7 @@ package br.com.sneacker.sneackerjava.dto;
 
 import jakarta.validation.constraints.*;
 
-public class SneackerRequest{
+public class SneakerRequest {
     @NotBlank(message = "O nome do sneacker é obrigatório!")
     @Size(min = 2, max = 100, message = "O nome deve ter entre 2 a 100 caracteres")
     private String nome;

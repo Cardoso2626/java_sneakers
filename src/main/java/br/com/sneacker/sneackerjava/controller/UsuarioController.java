@@ -48,7 +48,7 @@ public class UsuarioController {
     public ResponseEntity register (@RequestBody @Valid UsuarioRequest data) {
         if(this.repository.findByEmail(data.getEmail()) != null) return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.getSenha());
-        Usuario user = new Usuario(data.getEmail(),data.getNomeCompleto(),data.getCpf(), encryptedPassword, data.getSneackers(),data.getRole());
+        Usuario user = new Usuario(data.getEmail(),data.getNomeCompleto(),data.getCpf(), encryptedPassword, data.getSneakers(),data.getRole());
 
         this.repository.save(user);
 

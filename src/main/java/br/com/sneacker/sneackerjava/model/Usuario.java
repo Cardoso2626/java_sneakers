@@ -21,7 +21,7 @@ public class Usuario implements UserDetails {
     private String cpf;
     private String senha;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Sneacker> sneackers;
+    private List<Sneaker> sneakers;
     private UsuarioRole role;
 
 
@@ -30,22 +30,22 @@ public class Usuario implements UserDetails {
 
     }
 
-    public Usuario(String email, String nomeCompleto, String cpf, String senha, List<Sneacker> sneackers, UsuarioRole role) {
+    public Usuario(String email, String nomeCompleto, String cpf, String senha, List<Sneaker> sneakers, UsuarioRole role) {
         this.email = email;
         this.nomeCompleto = nomeCompleto;
         this.cpf = cpf;
         this.senha = senha;
-        this.sneackers = sneackers;
+        this.sneakers = sneakers;
         this.role = role;
     }
 
-    public Usuario(Long id, String email, String nomeCompleto, String cpf, String senha, List<Sneacker> sneackers, UsuarioRole role) {
+    public Usuario(Long id, String email, String nomeCompleto, String cpf, String senha, List<Sneaker> sneakers, UsuarioRole role) {
         this.id = id;
         this.email = email;
         this.nomeCompleto = nomeCompleto;
         this.cpf = cpf;
         this.senha = senha;
-        this.sneackers = sneackers;
+        this.sneakers = sneakers;
         this.role = role;
     }
 
@@ -58,12 +58,12 @@ public class Usuario implements UserDetails {
         this.role = role;
     }
 
-    public List<Sneacker> getSneackers() {
-        return sneackers;
+    public List<Sneaker> getSneakers() {
+        return sneakers;
     }
 
-    public void setSneackers(List<Sneacker> sneackers) {
-        this.sneackers = sneackers;
+    public void setSneakers(List<Sneaker> sneakers) {
+        this.sneakers = sneakers;
     }
 
     public Long getId() {

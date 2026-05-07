@@ -20,6 +20,8 @@ public class SecurityConfiguration {
 
     @Autowired
     private SecurityFilter securityFilter;
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_sneacker")
-public class Sneacker {
+public class Sneaker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,12 +22,12 @@ public class Sneacker {
     private Usuario usuario;
 
 
-    public Sneacker(){
+    public Sneaker(){
 
     }
 
 
-    public Sneacker(Long id, String nome, String marca, Double preco, String imagem, Boolean adquirido, Musica musica, Usuario usuario) {
+    public Sneaker(Long id, String nome, String marca, Double preco, String imagem, Boolean adquirido, Musica musica, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.marca = marca;

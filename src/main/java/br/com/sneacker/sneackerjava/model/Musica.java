@@ -11,27 +11,25 @@ public class Musica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "musica")
-    private List<Sneacker> sneackers;
-
-
-
+    private List<Sneaker> sneakers;
 
     public Musica() {
-
     }
-    public Musica(Long id, String nome, List<Sneacker> sneackers) {
+
+    public Musica(Long id, String nome, List<Sneaker> sneakers) {
         this.id = id;
         this.nome = nome;
-        this.sneackers = sneackers;
+        this.sneakers = sneakers;
     }
 
-    public List<Sneacker> getSneackers() {
-        return sneackers;
+    public List<Sneaker> getSneakers() {
+        return sneakers;
     }
 
-    public void setSneackers(List<Sneacker> sneackers) {
-        this.sneackers = sneackers;
+    public void setSneakers(List<Sneaker> sneakers) {
+        this.sneakers = sneakers;
     }
 
     public Long getId() {

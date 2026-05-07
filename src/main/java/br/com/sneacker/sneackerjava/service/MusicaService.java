@@ -3,9 +3,9 @@ package br.com.sneacker.sneackerjava.service;
 import br.com.sneacker.sneackerjava.dto.MusicaRequest;
 import br.com.sneacker.sneackerjava.dto.MusicaResponse;
 import br.com.sneacker.sneackerjava.model.Musica;
-import br.com.sneacker.sneackerjava.model.Sneacker;
+import br.com.sneacker.sneackerjava.model.Sneaker;
 import br.com.sneacker.sneackerjava.repository.MusicaRepository;
-import br.com.sneacker.sneackerjava.repository.SneackerRepository;
+import br.com.sneacker.sneackerjava.repository.SneakerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,45 +15,48 @@ import java.util.stream.Collectors;
 @Service
 public class MusicaService {
     public final MusicaRepository musicaRepository;
-    public final SneackerRepository sneackerRepository;
-    public MusicaService(MusicaRepository musicaRepository, SneackerRepository sneackerRepository) {
+    public final SneakerRepository sneakerRepository;
+
+    public MusicaService(MusicaRepository musicaRepository, SneakerRepository sneakerRepository) {
         this.musicaRepository = musicaRepository;
-        this.sneackerRepository = sneackerRepository;
+        this.sneakerRepository = sneakerRepository;
     }
 
     public MusicaResponse criarMusica(MusicaRequest musicaRequest) {
         Musica musica = new Musica();
         musica.setNome(musicaRequest.nome());
-        List<Long> idSneackers = new ArrayList<>();
-        if(musicaRequest.idSneackers() != null) {
-            List<Sneacker> sneackers =  sneackerRepository.findAllById(musicaRequest.idSneackers());
-            idSneackers = sneackers.stream().map(Sneacker::getId).collect(Collectors.toList());
-            musica.setSneackers(sneackers);
-        }else{
-            musica.setSneackers(null);
+        List<Long> idSneakers = new ArrayList<>();
+
+        if (musicaRequest.idSneakers() != null) {
+            List<Sneaker> sneakers = sneakerRepository.findAllById(musicaRequest.idSneakers());
+            idSneakers = sneakers.stream().map(Sneaker::getId).collect(Collectors.toList());
+            musica.setSneakers(sneakers);
+        } else {
+            musica.setSneakers(null);
         }
+
         musica = musicaRepository.save(musica);
         return new MusicaResponse(
                 musica.getNome(),
-                idSneackers
+                idSneakers
         );
-
     }
 
     public MusicaResponse pegarPorId(Long id) {
-        Musica musica = musicaRepository.findById(id).orElseThrow(() -> new RuntimeException("Musica não encontrada"));
-        List<Long> sneackersIds = musica.getSneackers() != null ? musica.getSneackers().stream().map(Sneacker::getId).collect(Collectors.toList()) : new ArrayList<>();
+        Musica musica = musicaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Musica não encontrada"));
+
+        List<Long> sneakersIds = musica.getSneakers() != null
+                ? musica.getSneakers().stream().map(Sneaker::getId).collect(Collectors.toList())
+                : new ArrayList<>();
+
         return new MusicaResponse(
                 musica.getNome(),
-                sneackersIds
-
+                sneakersIds
         );
-
     }
 
     public void deletarMusica(Long id) {
         musicaRepository.deleteById(id);
     }
-
-
 }
