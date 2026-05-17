@@ -8,7 +8,11 @@ import br.com.sneacker.sneackerjava.model.Usuario;
 import br.com.sneacker.sneackerjava.repository.MusicaRepository;
 import br.com.sneacker.sneackerjava.repository.SneakerRepository;
 import br.com.sneacker.sneackerjava.repository.UsuarioRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +29,8 @@ public class SneakerService {
         this.musicaRepository = musicaRepository;
     }
 
+    @Transactional
+    @Cacheable(value = "listaTenis")
     public List<SneakerResponse> listarSneakers(){
         List<Sneaker> sneakers = sneakerRepository.findAll();
         return sneakers.stream()
@@ -39,6 +45,11 @@ public class SneakerService {
                 )).collect(Collectors.toList());
     }
 
+    @Transactional
+    @CacheEvict(
+            value = {"listaTenis", "tenisPorUsuario", "musica"},
+            allEntries = true
+    )
     public SneakerResponse criarSneaker(SneakerRequest sneakerRequest) {
         Sneaker sneaker = new Sneaker();
         sneaker.setNome(sneakerRequest.getNome());
@@ -75,12 +86,25 @@ public class SneakerService {
         );
     }
 
+
+    @Transactional
+    @CacheEvict(
+            value = {"listaTenis", "tenisPorUsuario"},
+            allEntries = true
+    )
     public void deletarSneaker(Long id){
         Sneaker sneaker = sneakerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Sneaker não identificado!"));
         sneakerRepository.delete(sneaker);
     }
 
+
+
+    @Transactional
+    @CacheEvict(
+            value = {"listaTenis", "tenisPorUsuario", "musica"},
+            allEntries = true
+    )
     public SneakerResponse atualizarSneaker(SneakerRequest sneakerRequest, Long id) {
         Sneaker sneaker = sneakerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Sneaker não encontrado"));
@@ -114,6 +138,8 @@ public class SneakerService {
         );
     }
 
+    @Transactional
+    @Cacheable(value = "tenisPorUsuario", key="#emailUsuario")
     public List<SneakerResponse> listarTenisPorEmailUsuario(String emailUsuario) {
         Usuario usuario = usuarioRepository.findOptionalByEmail(emailUsuario)
                 .orElseThrow(() -> new RuntimeException("Email de usuário não encontrado: " + emailUsuario));

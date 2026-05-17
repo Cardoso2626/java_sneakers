@@ -35,7 +35,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/tenis/criar").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/usuario/auth/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/usuario/auth/register").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/usuario/{id}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/usuario/{id}").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/usuario/{id}").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/musica/criar").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/musica/{id}").permitAll()

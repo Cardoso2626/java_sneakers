@@ -6,7 +6,10 @@ import br.com.sneacker.sneackerjava.model.Musica;
 import br.com.sneacker.sneackerjava.model.Sneaker;
 import br.com.sneacker.sneackerjava.repository.MusicaRepository;
 import br.com.sneacker.sneackerjava.repository.SneakerRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,8 @@ public class MusicaService {
         );
     }
 
+    @Transactional
+    @Cacheable(value = "musica", key = "#id")
     public MusicaResponse pegarPorId(Long id) {
         Musica musica = musicaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Musica não encontrada"));
@@ -56,7 +61,10 @@ public class MusicaService {
         );
     }
 
+    @Transactional
+    @CacheEvict(value = "musica", key = "#id")
     public void deletarMusica(Long id) {
+        Musica musica = musicaRepository.findById(id).orElseThrow(() -> new RuntimeException("Musica não encontrada"));
         musicaRepository.deleteById(id);
     }
 }
