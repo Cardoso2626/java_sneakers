@@ -9,7 +9,9 @@ import java.util.List;
 public class Musica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "musica_id")
     private Long id;
+    @Column(name = "nome")
     private String nome;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "musica")

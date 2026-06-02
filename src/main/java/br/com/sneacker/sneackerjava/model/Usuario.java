@@ -15,13 +15,20 @@ import java.util.List;
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "usuario_id")
     private Long id;
+    @Column(name = "email")
     private String email;
+    @Column(name = "nome_completo")
     private String nomeCompleto;
+    @Column(name = "cpf")
     private String cpf;
+    @Column(name = "senha")
     private String senha;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Sneaker> sneakers;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private UsuarioRole role;
 
 

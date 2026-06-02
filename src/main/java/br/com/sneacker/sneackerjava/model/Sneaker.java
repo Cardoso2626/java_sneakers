@@ -4,15 +4,21 @@ package br.com.sneacker.sneackerjava.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_sneacker")
+@Table(name = "tb_sneaker")
 public class Sneaker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sneaker_id")
     private Long id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "marca")
     private String marca;
+    @Column(name = "preco", columnDefinition = "numeric")
     private Double preco;
+    @Column(name = "imagem")
     private String imagem;
+    @Column(name = "adquirido")
     private Boolean adquirido;
     @ManyToOne
     @JoinColumn(name = "musica_id")
