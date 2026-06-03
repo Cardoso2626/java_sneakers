@@ -89,7 +89,7 @@ public class SneakerService {
 
     @Transactional
     @CacheEvict(
-            value = {"listaTenis", "tenisPorUsuario"},
+            value = {"listaTenis", "tenisPorUsuario", "musica"},
             allEntries = true
     )
     public void deletarSneaker(Long id){
