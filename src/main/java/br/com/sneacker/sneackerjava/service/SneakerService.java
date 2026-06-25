@@ -39,6 +39,7 @@ public class SneakerService {
                         s.getNome(),
                         s.getMarca(),
                         s.getPreco(),
+                        s.getImagem(),
                         s.getAdquirido(),
                         s.getMusica() != null ? s.getMusica().getNome() : null,
                         s.getUsuario() != null ? s.getUsuario().getEmail() : null
@@ -55,6 +56,7 @@ public class SneakerService {
         sneaker.setNome(sneakerRequest.getNome());
         sneaker.setMarca(sneakerRequest.getMarca());
         sneaker.setPreco(sneakerRequest.getPreco());
+        sneaker.setImagem(sneakerRequest.getImagem());
         sneaker.setAdquirido(sneakerRequest.getAdquirido());
 
         if (sneakerRequest.getNomeMusica() != null){
@@ -80,6 +82,7 @@ public class SneakerService {
                 sneaker.getNome(),
                 sneaker.getMarca(),
                 sneaker.getPreco(),
+                sneaker.getImagem(),
                 sneaker.getAdquirido(),
                 sneaker.getMusica() != null ? sneaker.getMusica().getNome() : null,
                 sneaker.getUsuario() != null ? sneaker.getUsuario().getEmail() : null
@@ -111,6 +114,7 @@ public class SneakerService {
         sneaker.setNome(sneakerRequest.getNome());
         sneaker.setMarca(sneakerRequest.getMarca());
         sneaker.setPreco(sneakerRequest.getPreco());
+        sneaker.setImagem(sneakerRequest.getImagem());
         sneaker.setAdquirido(sneakerRequest.getAdquirido());
 
         if (sneakerRequest.getNomeMusica() != null){
@@ -132,6 +136,7 @@ public class SneakerService {
                 sneaker.getNome(),
                 sneaker.getMarca(),
                 sneaker.getPreco(),
+                sneaker.getImagem(),
                 sneaker.getAdquirido(),
                 sneaker.getMusica() != null ? sneaker.getMusica().getNome() : null,
                 sneaker.getUsuario() != null ? sneaker.getUsuario().getEmail() : null
@@ -150,6 +155,7 @@ public class SneakerService {
                         s.getNome(),
                         s.getMarca(),
                         s.getPreco(),
+                        s.getImagem(),
                         s.getAdquirido(),
                         s.getMusica() != null ? s.getMusica().getNome() : null,
                         s.getUsuario() != null ? s.getUsuario().getEmail() : null
