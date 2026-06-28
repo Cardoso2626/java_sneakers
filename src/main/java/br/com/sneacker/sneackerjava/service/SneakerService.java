@@ -47,6 +47,22 @@ public class SneakerService {
     }
 
     @Transactional
+    @Cacheable(value = "tenis", key = "#id")
+    public SneakerResponse pegarPorId(Long id){
+        Sneaker sneaker = sneakerRepository.findById(id).orElseThrow(() -> new RuntimeException("Id não encontrado"));
+        return new SneakerResponse(
+                sneaker.getId(),
+                sneaker.getNome(),
+                sneaker.getMarca(),
+                sneaker.getPreco(),
+                sneaker.getImagem(),
+                sneaker.getAdquirido(),
+                sneaker.getMusica() != null ? sneaker.getMusica().getNome() : null,
+                sneaker.getUsuario() != null ? sneaker.getUsuario().getEmail() : null
+        );
+    }
+
+    @Transactional
     @CacheEvict(
             value = {"listaTenis", "tenisPorUsuario", "musica"},
             allEntries = true
@@ -92,7 +108,7 @@ public class SneakerService {
 
     @Transactional
     @CacheEvict(
-            value = {"listaTenis", "tenisPorUsuario", "musica"},
+            value = {"listaTenis", "tenisPorUsuario", "musica", "tenis"},
             allEntries = true
     )
     public void deletarSneaker(Long id){
@@ -105,7 +121,7 @@ public class SneakerService {
 
     @Transactional
     @CacheEvict(
-            value = {"listaTenis", "tenisPorUsuario", "musica"},
+            value = {"listaTenis", "tenisPorUsuario", "musica", "tenis"},
             allEntries = true
     )
     public SneakerResponse atualizarSneaker(SneakerRequest sneakerRequest, Long id) {

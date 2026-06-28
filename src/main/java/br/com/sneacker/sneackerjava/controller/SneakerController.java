@@ -47,4 +47,11 @@ public class SneakerController {
         List<SneakerResponse> sneakers = sneakerService.listarTenisPorEmailUsuario(email);
         return ResponseEntity.status(HttpStatus.OK).body(sneakers);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SneakerResponse> pegarSneakerPorId(@PathVariable Long id){
+        SneakerResponse sneakerResponse = sneakerService.pegarPorId(id);
+        return ResponseEntity.status(HttpStatus.OK).body(sneakerResponse);
+    }
+
 }

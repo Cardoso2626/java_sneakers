@@ -33,6 +33,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tenis/listar/{email}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/tenis/listar").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/tenis/{id}").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/tenis/{id}").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/tenis/{id}").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/tenis/criar").hasRole("ADMIN")
